@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Interactive HTML5 page with CSS animations, local storage, and advanced JavaScript.">
+    <meta name="keywords" content="HTML5, CSS3, JavaScript, animations, transitions, localStorage, interactive">
+    <meta name="author" content="Abu Musa ">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="style.css">
+    <title>Advanced Interactive ASSINMENT</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid #333;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .tab-container {
+            display: flex;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            background-color: #eee;
+            margin-right: 5px;
+            transition: background-color 0.3s ease; /* CSS Transition */
+        }
+        .tab-button.active {
+            background-color: #ddd;
+        }
+        .tab-button:hover {
+            background-color: #ccc;
+        }
+        .slide-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            object-fit: cover;
+        }
+        .slide.active {
+            display: block;
+        }
+        .slide-controls {
+            text-align: center;
+            margin-top: 5px;
+        }
+        .slide-controls button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .secret-trigger {
+            cursor: pointer;
+            font-weight: bold;
+            color: blue;
+            text-decoration: underline;
+        }
+
+        /* New Animated Button */
+        .animated-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: transform 0.3s ease-in-out; /* CSS Transition */
+        }
+
+        .animated-button:hover {
+            transform: scale(1.1);
+            animation: pulse 1s infinite alternate; /* CSS Animation on Hover */
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1.1); }
+            to { transform: scale(1.15); }
+        }
+
+        /* Animated Image */
+        .animated-image {
+            width: 150px;
+            height: auto;
+            margin: 20px auto;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            animation: rotate 5s linear infinite; /* CSS Animation */
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #eee;
+        }
+        .dark-mode header {
+            background-color: #444;
+            color: #eee;
+        }
+        .dark-mode nav {
+            border-bottom-color: #666;
+        }
+        .dark-mode .tab-button {
+            background-color: #555;
+            color: #eee;
+        }
+        .dark-mode .tab-button.active {
+            background-color: #777;
+            color: white;
+        }
+        .dark-mode section {
+            background-color: #333;
+            color: #eee;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode h2 {
+            color: #00bcd4;
+        }
+        .dark-mode table, .dark-mode th, .dark-mode td {
+            border-color: #666;
+            color: #eee;
+        }
+        .dark-mode th {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <p style="background-color: #e0f7fa; font-size: 1.2em; color: #00acc1; text-align: center; padding: 10px;">ADVANCED INTERACTIVE PLAYGROUND</p>
+        <nav class="tab-container">
+            <button class="tab-button active" data-section-id="home">Home</button>
+            <button class="tab-button" data-section-id="animations">Animations</button>
+            <button class="tab-button" data-section-id="localstorage">Local Storage</button>
+            <button class="tab-button" data-section-id="lists">Lists</button>
+            <button class="tab-button" data-section-id="tables">Tables</button>
+            <button class="tab-button" data-section-id="forms">Forms</button>
+            <button id="changeTextButton">Change Header Text</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Welcome to the Advanced Interactive Playground!</h2>
+            <p>Explore CSS animations, local storage usage, and dynamic JavaScript interactions.</p>
+            <p>Try the animated button and image below!</p>
+            <button class="animated-button" id="animateMeButton">Animate Me!</button>
+            <img src="amr.jpg" alt="Rotating Image" class="animated-image">
+            <p>You can also toggle the theme using the button at the bottom right.</p>
+        </section>
+
+        <section id="animations" style="display: none;">
+            <h2>CSS3 Animations</h2>
+            <p>This section demonstrates CSS animations applied to different elements.</p>
+            <button class="animated-button">Hover to See Pulse</button>
+            <img src="amr2.jpg" alt="Rotating Image" class="animated-image">
+        </section>
+
+        <section id="localstorage" style="display: none;">
+            <h2>Local Storage Example</h2>
+            <p>This section shows how user preferences can be stored and retrieved using local storage.</p>
+            <button id="savePreferenceButton">Save Preference: Dark Theme</button>
+            <p id="preferenceStatus">Preference status will be shown here.</p>
+        </section>
+
+        <section id="lists" style="display: none;">
+            <h2>Implementing HTML5 Lists</h2>
+            <p>Here are some programming languages:</p>
+            <ol style="list-style-type: decimal;">
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>Java</li>
+                <li>C++</li>
+            </ol>
+            <p>And some web development skills:</p>
+            <ul style="list-style-type: disc;">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Responsive Design</li>
+            </ul>
+        </section>
+
+        <section id="tables" style="display: none;">
+            <h2>Implementing HTML5 Tables</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alice</td>
+                        <td>25</td>
+                        <td>New York</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Bob</td>
+                        <td>32</td>
+                        <td>London</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Charlie</td>
+                        <td>28</td>
+                        <td>Paris</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="forms" style="display: none;">
+            <h2>Implementing HTML5 Forms and Input Types</h2>
+            <form id="registrationForm" action="#" method="post">
+                <fieldset style="background-color: #00bcd4;">
+                    <legend>REGISTRATION FORM</legend>
+                    <p>
+                        <label for="fname">FULLNAME:</label>
+                        <input type="text" id="fname" name="fullname" placeholder="Enter your full name" autocomplete="on" required autofocus>
+                        <span class="error-message" id="fnameError"></span>
+                    </p>
+                    <p>
+                        <label for="email">EMAIL:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="on" required>
+                        <span class="error-message" id="emailError"></span>
+                    </p>
+                    <p>
+                        <label for="password">PASSWORD:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password (min 8 chars)" minlength="8" required>
+                        <span class="error-message" id="passwordError"></span>
+                    </p>
+                    <p>
+                        <label for="date">DATE OF BIRTH:</label>
+                        <input type="date" id="date" name="date" required>
+                    </p>
+                    <p>
+                        <label for="gender">GENDER:</label>
+                        <input type="radio" id="male" name="gender" value="male" required> Male
+                        <input type="radio" id="female" name="gender" value="female" required> Female
+                    </p>
+                    <p>
+                        <label for="country">COUNTRY:</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select your country</option>
+                            <option value="usa">United States</option>
+                            <option value="canada">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="australia">Australia</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="terms">AGREE TO TERMS:</label>
+                        <input type="checkbox" id="terms" name="terms" required> I agree to the terms and conditions
+                    </p>
+                    <p>
+                        <button type="submit" value="SIGNUP" name="submit" id="submitBtn">Submit</button>
+                        <span id="formMessage" style="display: none;"></span>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="themeToggleButton">Toggle Dark Mode</button>
+
+    <footer style="background-color: #e0f7fa; font-size: 0.9em; color: #00acc1; text-align: center; padding: 10px; margin-top: 20px;">
+        <p>&copy; AMR TECHNOLOGIES</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
